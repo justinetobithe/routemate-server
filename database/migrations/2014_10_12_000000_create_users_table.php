@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('two_factor_code')->nullable();
             $table->timestamp('two_factor_expires_at')->nullable();
-            $table->enum('role', ['user', 'admin'])->default('passenger');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('image')->nullable();
             $table->rememberToken();
             $table->timestamps();

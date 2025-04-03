@@ -39,7 +39,7 @@ class AuthController extends Controller
         }
 
         $validated['password'] = Hash::make($validated['password']);
- 
+
         $user = User::create($validated);
 
         return response()->json([
@@ -78,14 +78,8 @@ class AuthController extends Controller
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = auth()->user();
-            if ($user->status == 0) {
-                return response()->json([
-                    'status' => false,
-                    'message' => __('messages.errors.needs_approval'),
-                ]);
-            }
 
-            if ($user->role !== 'passenger' && $user->role !== 'driver') {
+            if ($user->role !== 'user') {
                 return response()->json([
                     'status' => false,
                     'message' => __('messages.errors.role_access_denied'),
